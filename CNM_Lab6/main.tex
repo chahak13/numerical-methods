@@ -1,0 +1,154 @@
+\documentclass[12,a4paper]{article}
+
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{blindtext}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{
+  language=Python,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+\title{Computational and Numerical Methods}
+\date{\today}
+\author{Amarnath Karthi  201501005 \\ Chahak Mehta  201501422}
+
+\setlength{\parindent}{0em}
+
+\makeatletter
+\begin{document}
+    \begin{titlepage}
+	    \centering
+	    {\scshape\LARGE SC-374 \par}
+	    \vspace{0.1cm}
+	    {\huge \@title \par}
+	    \vspace{0.5cm}
+	    {\Large Assignment 6\par}
+	    \vspace{10cm}
+	    \Large Amarnath Karthi          201501005\\
+	    \Large Chahak Mehta             201501422\\
+	    \vspace{5cm}
+	    {\large \@date\par}
+    \end{titlepage}
+    
+    \section{Euler's method}
+    \subsection{$Y' = -Y(x), Y(0) = 1$}
+
+    \begin{figure}[H]
+        \centering
+        \begin{subfigure}[t]{0.49\textwidth}
+            \includegraphics[width = \textwidth]{plots/euler_1.png}
+            \caption{Solutions}
+            \label{fig:sol_e1}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.49\textwidth}
+            \includegraphics[width = \textwidth]{plots/euler_error_1.png}
+            \caption{Errors}
+            \label{fig:err_e1}
+        \end{subfigure}
+    \end{figure}
+    
+    \subsection{$Y'(x) = [Y(x) + x^2 - 2]/(x+1),Y(0) = 2$}
+    
+    \begin{figure}[H]
+        \centering
+        \begin{subfigure}[t]{0.49\textwidth}
+            \includegraphics[width = \textwidth]{plots/euler_2.png}
+            \caption{Solutions}
+            \label{fig:sol_e2}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.49\textwidth}
+            \includegraphics[width = \textwidth]{plots/euler_error_2.png}
+            \caption{Errors}
+            \label{fig:err_e2}
+        \end{subfigure}
+    \end{figure}
+    
+    \section{Trapezoidal Method}
+    
+    \subsection{$Y' = -Y(x), Y(0) = 1$}
+    
+    \begin{figure}[H]
+        \centering
+        \begin{subfigure}[t]{0.49\textwidth}
+            \includegraphics[width = \textwidth]{plots/trapezoidal_1.png}
+            \caption{Solutions}
+            \label{fig:sol_t1}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.49\textwidth}
+            \includegraphics[width = \textwidth]{plots/trapezoidal_error_1.png}
+            \caption{Errors}
+            \label{fig:err_t1}
+        \end{subfigure}
+    \end{figure}
+    
+    \subsection{$Y'(x) = [Y(x) + x^2 - 2]/(x+1), Y(0) = 2$}
+    
+    \begin{figure}[H]
+        \centering
+        \begin{subfigure}[t]{0.49\textwidth}
+            \includegraphics[width = \textwidth]{plots/trapezoidal_2.png}
+            \caption{Solutions}
+            \label{fig:sol_t2}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.49\textwidth}
+            \includegraphics[width = \textwidth]{plots/trapezoidal_error_2.png}
+            \caption{Errors}
+            \label{fig:err_t2}
+        \end{subfigure}
+    \end{figure}
+
+    \section{Taylor's Method}
+    \subsection{$Y'(x) = -Y(x) + 2\cos(x), Y(0) = 1$}
+    
+    \begin{figure}[H]
+        \centering
+        \begin{subfigure}[t]{0.49\textwidth}
+            \includegraphics[width = \textwidth]{plots/taylor_h1.png}
+            \caption{Solutions for $h = 0.1$}
+            \label{fig:sol_ta1}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.49\textwidth}
+            \includegraphics[width = \textwidth]{plots/taylor_error_h1.png}
+            \caption{Errors for $h =  0.1$}
+            \label{fig:err_ta1}
+        \end{subfigure}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \begin{subfigure}[t]{0.49\textwidth}
+            \includegraphics[width = \textwidth]{plots/taylor_h2.png}
+            \caption{Solutions for $h = 0.05$}
+            \label{fig:sol_ta1}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.49\textwidth}
+            \includegraphics[width = \textwidth]{plots/taylor_error_h2.png}
+            \caption{Errors for $h = 0.05$}
+            \label{fig:err_ta2}
+        \end{subfigure}
+    \end{figure}
+
+    
+\end{document}

@@ -1,0 +1,188 @@
+\documentclass[12,a4paper]{article}
+
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{blindtext}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{
+  language=Python,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+\title{Computational and Numerical Methods}
+\date{\today}
+\author{Amarnath Karthi  201501005 \\ Chahak Mehta  201501422}
+
+\setlength{\parindent}{0em}
+
+\makeatletter
+\begin{document}
+    \begin{titlepage}
+	    \centering
+	    {\scshape\LARGE SC-374 \par}
+	    \vspace{0.1cm}
+	    {\huge \@title \par}
+	    \vspace{0.5cm}
+	    {\Large Assignment 5\par}
+	    \vspace{10cm}
+	    \Large Amarnath Karthi          201501005\\
+	    \Large Chahak Mehta             201501422\\
+	    \vspace{5cm}
+	    {\large \@date\par}
+    \end{titlepage}
+    
+    \section{Accretion discs}
+    
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width = \textwidth]{plots/accretion.png}
+        \caption{Assignment 2}
+        \label{fig:acc_disc}
+    \end{figure}
+    
+    \section{Gaussian Elimination Method}
+    \begin{enumerate}
+        \item Solve system of linear equations:
+            \begin{eqnarray*}
+                x_1 + 2x_2 + x_3 &=& 0 \\
+                2x_1 + 2x_2 + 3x_3 &=& 3 \\
+                -x_1 - 3x_2 &=& 2
+            \end{eqnarray*}
+            \textbf{Soln:}\\
+            \begin{table}[H]
+                \centering
+                \begin{tabular}{|c|c|}
+                    \hline
+                    $x_1$ & 1 \\
+                    $x_2$ & -1 \\
+                    $x_3$ & 1 \\
+                    \hline 
+                \end{tabular}
+            \end{table}
+
+        \item Solve system of linear equations:
+            \begin{eqnarray*}
+                4x_1 + 3x_2 + 2x_3 + x_4 &=& 1 \\
+                3x_1 + 4x_2 + 3x_3 + 2x_4 &=& 1 \\
+                2x_1 + 3x_2 + 4x_3 + 3x_4 &=& -1 \\
+                x_1 + 2x_2 + 3x_3 + 4x_4 &=& -1 
+            \end{eqnarray*}
+            \textbf{Soln:}\\
+            \begin{table}[H]
+                \centering
+                \begin{tabular}{|c|c|}
+                    \hline
+                    $x_1$ &  0\\
+                    $x_2$ &  1\\
+                    $x_3$ &  -1\\
+                    $x_4$ & 0\\ 
+                    \hline
+                \end{tabular}
+            \end{table}
+
+        \item Find the inverse of the following matrix:\\
+            \[
+            \begin{bmatrix}
+                1 & 1 & -1 \\
+                1 & 2 & -2 \\
+                -2 & 1 & 1
+            \end{bmatrix}
+            \]
+            \textbf{Soln:}\\
+            \[
+                \begin{bmatrix}
+                2.00000000e+00 & -1.00000000e+00 & -2.49800181e-16 \\
+                1.50000000e+00 & -5.00000000e-01 &  5.00000000e-01 \\
+                2.50000000e+00 & -1.50000000e+00 &  5.00000000e-01
+                \end{bmatrix}
+            \]
+    \end{enumerate}
+    
+    \section{Jacobi Iteration and Gauss-Seidel Methods}
+    \begin{eqnarray*}
+        9x_1 + x_2 + x_3 &=& 10 \\
+        2x_1 + 10x_2 + 3x_3 &=& 19 \\
+        3x_1 + 4x_2 + 11x_3 &=& 0
+    \end{eqnarray*}
+    Initial guess values of $x^{(0)}_1 = x^{(0)}_2 = x^{(0)}_3 = 0$ and using a tolerance of $0.001$.
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{|c|c|c|c|}
+            \hline
+            variable & Analytic solution & Jacobi & Gauss-Seidel \\
+            $x_1$ & 1 & 1.00000701759 & 1.00000701759 \\
+            $x_2$ & 2 & 2.00010775418 & 2.00001652  \\
+            $x_3$ & -1 & -0.99985948542 & -1.00000792175 \\
+            \hline 
+        \end{tabular}
+    \end{table}
+    \begin{figure}[H]
+        \centering
+        \begin{subfigure}[t]{0.49\textwidth}
+            \includegraphics[width=\textwidth]{plots/Convergence_of_x0.png}
+            \caption{Convergence of $x_1$}
+            \label{fig:conv_x1}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.49\textwidth}
+            \includegraphics[width=\textwidth]{plots/Convergence_of_x1.png}
+            \caption{Convergence of $x_2$}
+            \label{fig:conv_x2}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.49\textwidth}
+            \includegraphics[width=\textwidth]{plots/Convergence_of_x2.png}
+            \caption{Convergence of $x_3$}
+            \label{fig:conv_x3}
+        \end{subfigure}
+        \caption{A comparison of the convergence of all roots for Jacobi and Gauss-Seidel methods}
+    \end{figure}
+    
+    
+    \newpage
+    \section{Non-linear Systems using Netwon Raphson method}
+    
+    \begin{eqnarray*}
+        f(x,y) \equiv x^2 + 4y^2 - 9 &=& 0 \\
+        g(x,y) \equiv 18y - 14x^2 + 45 &=& 0 \\
+    \end{eqnarray*}
+    
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width = \textwidth]{plots/non-linear.png}
+    \end{figure}
+    
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{|c|c|}
+        \hline
+            $(x_1,y_1)$ & (-2.13721674 , 1.05265196) \\
+            $(x_2,y_2)$ & (-1.20316696 , -1.37408053) \\
+            $(x_3,y_3)$ & ( 1.20316696 , -1.37408053) \\
+            $(x_4,y_4)$ & ( 2.13721674 , 1.05265196) \\
+        \hline
+        \end{tabular}
+    \end{table}
+    
+    $(x_1,y_1), (x_2,y_2), (x_3,y_3), (x_4,y_4)$ took 4, 5, 5, 4 iterations respectively to converge.
+    
+\end{document}

@@ -1,0 +1,347 @@
+\documentclass[12,a4paper]{article}
+
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{blindtext}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{
+  language=Python,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+\title{Computational and Numerical Methods}
+\date{\today}
+\author{Amarnath Karthi  201501005 \\ Chahak Mehta  201501422}
+
+\setlength{\parindent}{0em}
+
+\makeatletter
+\begin{document}
+    \begin{titlepage}
+	    \centering
+	    {\scshape\LARGE SC-374 \par}
+	    \vspace{0.1cm}
+	    {\huge \@title \par}
+	    \vspace{0.5cm}
+	    {\Large Assignment 4\par}
+	    \vspace{10cm}
+	    \Large Amarnath Karthi          201501005\\
+	    \Large Chahak Mehta             201501422\\
+	    \vspace{5cm}
+	    {\large \@date\par}
+    \end{titlepage}
+    \section{Numerical Integration using Trapezoidal and Simpson methods}
+    \subsection{$\int_0^\pi e^{x}\cos({4x}) dx$}
+    \begin{figure}[h!]
+        \centering
+        \begin{subfigure}[t]{0.49\textwidth}
+            \includegraphics[width=\textwidth]{plots/q1a.png}
+            \caption{Value of integration vs $n$}
+            \label{fig:sq3a}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.49\textwidth}
+            \includegraphics[width=\textwidth]{plots/q1b.png}
+            \caption{Error vs $n$}
+            \label{fig:q3b}
+        \end{subfigure}
+        \caption{A comparison of the Trapezoidal and the Simpson Methods}
+    \end{figure}
+    The analytical solution is:
+    
+    \begin{equation}
+    \nonumber
+    \frac{e^\pi - 1}{17} = 1.3024
+    \end{equation}
+    
+    Notice that in this particular case, for certain values of $n$, the Trapezoidal method gives lesser error than the Simpson method. This is because of the oscillations in the integrand.
+    
+    \renewcommand{\arraystretch}{1.5}
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{ |c|c|c|c|c| }
+            \hline
+            $n$ & \textbf{Trapezoidal} & \textbf{Simpson} & \textbf{Trapezoidal Error} & \textbf{Simpson Error}\\
+            \hline
+            2 & 26.5163358571 & 22.7150773715 & 25.2139421728 & 21.4126836872 \\
+            4 & 3.24905049448 & -4.50671129305 & 1.9466568102 & 5.80910497733 \\
+            8 & 1.62452524724 & 1.08301683149 & 0.322131562961 & 0.219376852786 \\
+            16 & -3.16794185573 & -0.221766516671 & 4.47033554001 & 1.52416020095 \\
+            32 & -0.951520308268 & 0.544564269784 & 2.25391399255 & 0.757829414498 \\
+            64 & 1.3068478855 & 1.68099858564 & 0.00445420121631 & 0.378604901356 \\
+            128 & 1.3035056585 & 1.49171093172 & 0.00111197421592 & 0.18931724744 \\
+            256 & 1.30267157946 & 1.39705322755 & 0.000277895174647 & 0.094659543273 \\
+            512 & 1.16047364026 & 1.25506383886 & 0.14192004402 & 0.0473298454176 \\
+            \hline
+        \end{tabular}
+    \end{table}
+    \newpage
+    \subsection{$\int_0^1 x^{\frac{5}{2}} dx$}
+    \begin{figure}[h!]
+        \centering
+        \begin{subfigure}[t]{0.49\textwidth}
+            \includegraphics[width=\textwidth]{plots/q1c.png}
+            \caption{Value of integration vs $n$}
+            \label{fig:sq3a}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.49\textwidth}
+            \includegraphics[width=\textwidth]{plots/q1d.png}
+            \caption{Error vs $n$}
+            \label{fig:q3b}
+        \end{subfigure}
+        \caption{A comparison of the Trapezoidal and the Simpson Methods}
+    \end{figure}
+    
+    The analytical solution is $\frac{2}{7}$ (2.8571).
+    
+    \parskip1em
+    Notice that the Simpson method converges to the solution much faster than the Trapezoid method. Also notice that for a given $n$,  the Simpson method has a much lower error.
+    
+    \renewcommand{\arraystretch}{1.5}
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{ |c|c|c|c|c| }
+            \hline
+            $n$ & \textbf{Trapezoidal} & \textbf{Simpson} & \textbf{Trapeoidal Error} & \textbf{Simpson Error}\\
+            \hline
+            2 & 0.338388347648 & 0.284517796864 & 0.052674061934 & 0.00119648884986 \\
+            4 & 0.298791496231 & 0.285592545759 & 0.0130772105171 & 0.000121739955264 \\
+            8 & 0.28897473967 & 0.285702487483 & 0.00326045395586 & 1.17982312106e-05 \\
+            16 & 0.286528567896 & 0.285713177305 & 0.000814282181752 & 1.10840961681e-06 \\
+            32 & 0.285917779699 & 0.285714183633 & 0.000203493984448 & 1.02081319453e-07 \\
+            64 & 0.28576515225 & 0.285714276434 & 5.08665361767e-05 & 9.27991378186e-09 \\
+            128 & 0.285727001721 & 0.285714284878 & 1.27160068126e-05 & 8.3630879999e-10 \\
+            256 & 0.28571746466 & 0.285714285639 & 3.17894550972e-06 & 7.4924566551e-11 \\
+            512 & 0.285715080446 & 0.285714285708 & 7.9473136344e-07 & 6.68542998739e-12 \\
+            \hline
+        \end{tabular}
+    \end{table}
+    \newpage
+    \subsection{$\int_0^5 \frac{1}{1 + (x - \pi)^2} dx$}
+    \begin{figure}[h!]
+        \centering
+        \begin{subfigure}[t]{0.49\textwidth}
+            \includegraphics[width=\textwidth]{plots/q1e.png}
+            \caption{Value of integration vs $n$}
+            \label{fig:sq3a}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.49\textwidth}
+            \includegraphics[width=\textwidth]{plots/q1f.png}
+            \caption{Error vs $n$}
+            \label{fig:q3b}
+        \end{subfigure}
+        \caption{A comparison of the Trapezoidal and the Simpson Methods}
+    \end{figure}
+    
+    The analytical solution is :
+    \begin{equation}
+        \nonumber
+        \arctan(5)+\arctan(5-\pi) = 2.3397
+    \end{equation}
+    \parskip1em
+    Notice that the Simpson method converges to the solution almost at the same rate as Trapezoid method initially. Also notice that for a given large $n$,  the Simpson method has a much lower error.
+    
+    \renewcommand{\arraystretch}{1.5}
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{ |c|c|c|c|c| }
+            \hline
+            $n$ & \textbf{Trapezoidal} & \textbf{Simpson} & \textbf{Trapeoidal Error} & \textbf{Simpson Error}\\
+            \hline
+            2 & 2.16665484358 & 2.62509546184 & 0.173111440085 & 0.285329178167 \\
+            4 & 2.26866764398 & 2.30267191077 & 0.0710986396921 & 0.0370943728946 \\
+            8 & 2.33227046587 & 2.3534714065 & 0.00749581779951 & 0.0137051228314 \\
+            16 & 2.33781288101 & 2.33966035273 & 0.00195340265534 & 0.000105930940619 \\
+            32 & 2.33927712301 & 2.33976520368 & 0.000489160655167 & 1.07998844268e-06 \\
+            64 & 2.33964394293 & 2.33976621624 & 0.000122340738076 & 6.7432379236e-08 \\
+            128 & 2.33973569532 & 2.33976627945 & 3.0588347208e-05 & 4.21691925823e-09 \\
+            256 & 2.33975863638 & 2.3397662834 & 7.64728449809e-06 & 2.6359270322e-10 \\
+            512 & 2.33976437183 & 2.33976628365 & 1.91183347953e-06 & 1.6474821507e-11 \\
+            \hline
+        \end{tabular}
+    \end{table}
+    \newpage
+    \subsection{$\int_0^{10} e^{-x^2}dx$}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{plots/q2a.png}
+        \caption{A comparison of the Trapezoidal and the Simpson Methods}
+        \label{fig:my_label}
+    \end{figure}
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{ |c|c|c| }
+            \hline
+            $n$ & \textbf{Trapezoidal} & \textbf{Simpson}\\
+            \hline
+            2 & 2.50000000007 & 1.66666666676 \\
+            4 & 1.25482613538 & 0.839768180477 \\
+            8 & 0.889428278063 & 0.767628992292 \\
+            16 & 0.886226925472 & 0.885159807941 \\
+            32 & 0.886226925453 & 0.886226925446 \\
+            64 & 0.886226925453 & 0.886226925453 \\
+            128 & 0.886226925453 & 0.886226925453 \\
+            256 & 0.886226925453 & 0.886226925453 \\
+            512 & 0.886226925453 & 0.886226925453 \\
+            \hline
+        \end{tabular}
+    \end{table}
+    \newpage
+    \subsection{$\int_0^2 \arctan(1+x^2)dx$}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{plots/q2b.png}
+        \caption{A comparison of the Trapezoidal and the Simpson Methods}
+        \label{fig:my_label}
+    \end{figure}
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{ |c|c|c| }
+            \hline
+            $n$ & \textbf{Trapezoidal} & \textbf{Simpson}\\
+            \hline
+            2 & 2.18654818297 & 2.19579793384 \\
+            4 & 2.17745048137 & 2.17441791418 \\
+            8 & 2.17506135648 & 2.17426498151 \\
+            16 & 2.17446133091 & 2.17426132239 \\
+            32 & 2.174311149 & 2.17426108836 \\
+            64 & 2.17427359256 & 2.17426107374 \\
+            128 & 2.17426420276 & 2.17426107283 \\
+            256 & 2.17426185527 & 2.17426107277 \\
+            512 & 2.17426126839 & 2.17426107277 \\
+            \hline
+        \end{tabular}
+    \end{table}
+    \newpage
+    \section{Spline Interpolation}
+    \subsection*{Problem 1}
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{ |c|c|c|c|c|c| }
+            \hline
+            $x$ & 1 & 2 & 3 & 4 & 5\\
+            \hline
+            $y$ & 3 & 1 & 2 & 3 & 2\\
+            \hline
+        \end{tabular}
+    \end{table}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{plots/q3a.png}
+        \label{fig:my_label}
+    \end{figure}
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{ |c|c|}
+            \hline
+            \textbf{Coefficient} & \textbf{Value}\\
+            \hline
+            $M_0$ & 0\\
+            $M_1$ & 4.6071428571428568\\
+            $M_2$ & -0.42857142857142849\\
+            $M_3$ & -2.8928571428571432\\
+            $M_4$ & 0\\
+            \hline
+        \end{tabular}
+    \end{table}
+    \newpage
+    \subsection*{Problem 2}
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{ |c|c|c|c|c|c| }
+            \hline
+            $x$ & 0 & 0.5 & 1 & 2 & 3\\
+            \hline
+            $y$ & 0 & 0.25 & 1 & -1 & -1\\
+            \hline
+        \end{tabular}
+    \end{table}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{plots/q3b.png}
+        \label{fig:my_label}
+    \end{figure}
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{ |c|c|}
+            \hline
+            \textbf{Coefficient} & \textbf{Value}\\
+            \hline
+            $M_0$ & 0\\
+            $M_1$ & 5.4285714285714297\\
+            $M_2$ & -9.7142857142857153\\
+            $M_3$ & 5.4285714285714288\\
+            $M_4$ & 0\\
+            \hline
+        \end{tabular}
+    \end{table}
+    \newpage
+    \subsection*{Problem 3}
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{ |c|c|c|c|c|c|c| }
+            \hline
+            $x$ & 0 & 1 & 2 & 2.5 & 3 & 4\\
+            \hline
+            $y$ & 1.4 & 0.6 & 1.0 & 0.65 & 0.5 & 1.0\\
+            \hline
+        \end{tabular}
+    \end{table}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{plots/q3c.png}
+        \label{fig:my_label}
+    \end{figure}
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{ |c|c|}
+            \hline
+            \textbf{Coefficient} & \textbf{Value}\\
+            \hline
+            $M_0$ & 0\\
+            $M_1$ & 2.6788381742738592\\
+            $M_2$ & -3.5153526970954365\\
+            $M_3$ & 2.5344398340248961\\
+            $M_4$ & 0.57759336099585101\\
+            $M_5$ & 0\\
+            \hline
+        \end{tabular}
+    \end{table}
+    \newpage
+    \section{Linear Interpolation}
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{ |c|c|c|c|c|c|c|c| }
+            \hline
+            $x$ & 0 & 1 & 2 & 3 & 4 & 5 & 6\\
+            \hline
+            $y$ & 2 & 2.1592 & 3.1697 & 5.4332 & 9.1411 & 14.407 & 21.303\\
+            \hline
+        \end{tabular}
+    \end{table}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{plots/q4.png}
+        \label{fig:my_label}
+    \end{figure}
+\end{document}

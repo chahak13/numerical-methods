@@ -1,0 +1,575 @@
+\documentclass[12,a4paper]{article}
+
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{blindtext}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{
+  language=Python,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+\title{Computational and Numerical Methods}
+\date{\today}
+\author{Amarnath Karthi  201501005 \\ Chahak Mehta  201501422}
+
+\setlength{\parindent}{0em}
+
+\makeatletter
+\begin{document}
+    \begin{titlepage}
+	\centering
+	{\scshape\LARGE SC-374 \par}
+	\vspace{0.1cm}
+	{\huge \@title \par}
+	\vspace{0.5cm}
+	{\Large Assignment 2\par}
+	\vspace{10cm}
+	\Large Amarnath Karthi          201501005\\
+	\Large Chahak Mehta             201501422\\
+	\vspace{5cm}
+	{\large \@date\par}
+\end{titlepage}
+    \section{Taylor Series}
+    \textbf{Produce the first, second and third-degree Taylor polynomials for each of the foregoing functions, using $a=1$ as the point of approximation for $\ln x$ and $a=0$ for the rest. In a suitably chosen neighbourhood of $a$, follow how the accuracy of a Taylor polynomial improves with its increasing degree. For this you will have to estimate the difference between $f(x)$ and its Taylor polynomials in a code. Present your results graphically for each of the functions for all its degrees.
+    \begin{enumerate}
+        \item $y=e^x$
+        \item $y=x$
+        \item $y=ln(x)$ 
+    \end{enumerate}
+    }
+    The general Taylor series expansion for a function $f(x)$ about a point of approximation $a$ is given by:
+    \begin{equation}
+        f(x) = \sum_{n=0}^\infty{f^n(x)\frac{(x-a)^n}{n!}}
+    \end{equation}
+    The $n^{th}$ order Taylor polynomial can derived as follows:
+    \begin{equation}
+        p_n(x) = \sum_{k=0}^n{f^k(x)\frac{(x-a)^k}{k!}}
+    \end{equation}
+    \subsection{The exponential function $e^x$}
+    \begin{figure}[h!]
+        \centering
+        \begin{subfigure}[t]{0.49\textwidth}
+            \includegraphics[width=\textwidth]{plots/q1p1.png}
+            \caption{Plot of $y=e^x$ and it's Taylor polynomials}
+            \label{fig:q1a}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.49\textwidth}
+            \includegraphics[width=\textwidth]{plots/q1p2.png}
+            \caption{Taylor polynomial errors}
+            \label{fig:q1b}
+        \end{subfigure}
+    \end{figure}
+    We take the point of approximation $a = 0$.
+    \begin{eqnarray}
+        p_1(x) &=& 1 + x \nonumber \\
+        p_2(x) &=& 1 + x + \frac{x^2}{2} \nonumber \\
+        p_1(x) &=& 1 + x + \frac{x^2}{2} + \frac{x^3}{6} \nonumber
+    \end{eqnarray}
+    In \textbf{figure \ref{fig:q1a}}, we can see the behavior of the three orders of the Taylor polynomial expansions of the function $y=e^x$ while in \textbf{figure \ref{fig:q1b}} we can see the errors that exist between the Taylor polynomial and the actual function for different orders.
+    \subsection{The sine function $\sin(x)$:}
+    \begin{figure}[h!]
+        \centering
+        \begin{subfigure}[t]{0.49\textwidth}
+            \includegraphics[width=\textwidth]{plots/q1p5.png}
+            \caption{Plot of $y=\sin(x)$ and it's Taylor polynomials}
+            \label{fig:q2a}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.49\textwidth}
+            \includegraphics[width=\textwidth]{plots/q1p6.png}
+            \caption{Taylor polynomial errors}
+            \label{fig:q2b}
+        \end{subfigure}
+    \end{figure}
+    We take the point of approximation $a = 0$.
+    \begin{eqnarray}
+        p_1(x) &=& x \nonumber \\
+        p_2(x) &=& x \nonumber \\
+        p_1(x) &=& x - \frac{x^3}{6} \nonumber
+    \end{eqnarray}
+    In \textbf{figure \ref{fig:q2a}}, we can see the behavior of the three orders of the Taylor polynomial expansions of the function $y=\sin(x)$ while in \textbf{figure \ref{fig:q2b}} we can see the errors that exist between the Taylor polynomial and the actual function for different orders.
+    \subsection{The cosine function $\cos(x)$:}
+    \begin{figure}[H]
+        \centering
+        \begin{subfigure}[t]{0.49\textwidth}
+            \includegraphics[width=\textwidth]{plots/q1p7.png}
+            \caption{Plot of $y=\cos(x)$ and it's Taylor polynomials}
+            \label{fig:q3a}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.49\textwidth}
+            \includegraphics[width=\textwidth]{plots/q1p8.png}
+            \caption{Taylor polynomial errors}
+            \label{fig:q3b}
+        \end{subfigure}
+    \end{figure}
+    We take the point of approximation $a = 0$.
+    \begin{eqnarray}
+        p_1(x) &=& 1 \nonumber \\
+        p_2(x) &=& 1 - \frac{x^2}{2} \nonumber \\
+        p_1(x) &=& 1 - \frac{x^2}{2} \nonumber
+    \end{eqnarray}
+    In \textbf{figure \ref{fig:q3a}}, we can see the behavior of the three orders of the Taylor polynomial expansions of the function $y=\cos(x)$ while in \textbf{figure \ref{fig:q3b}} we can see the errors that exist between the Taylor polynomial and the actual function for different orders.
+    \subsection{The logarithmic function $\log(x)$}
+    \begin{figure}[h!]
+        \centering
+        \begin{subfigure}[t]{0.49\textwidth}
+            \includegraphics[width=\textwidth]{plots/q1p3.png}
+            \caption{Plot of $y=\ln(x)$ and it's Taylor polynomials}
+            \label{fig:q4a}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.49\textwidth}
+            \includegraphics[width=\textwidth]{plots/q1p4.png}
+            \caption{Taylor polynomial errors}
+            \label{fig:q4b}
+        \end{subfigure}
+    \end{figure}
+    We take the point of approximation $a = 1$.
+    \begin{eqnarray}
+        p_1(x) &=& x - 1 \nonumber \\
+        p_2(x) &=& x - 1 - \frac{(x-1)^2}{2} \nonumber \\
+        p_1(x) &=& x - 1 - \frac{(x-1)^2}{2} + \frac{(x-1)^3}{6} \nonumber
+    \end{eqnarray}
+    In \textbf{figure \ref{fig:q4a}}, we can see the behavior of the three orders of the Taylor polynomial expansions of the function $y=\ln(x)$ while in \textbf{figure \ref{fig:q4b}} we can see the errors that exist between the Taylor polynomial and the actual function for different orders.
+    \subsection{Some important observations}
+    \begin{enumerate}
+        \item The zeroth order taylor polynomial of the function $f$ at point of approximation $a$ is the line $x = f(a)$.
+        \item The first order taylor polynomial is a tangent to the function at the point $x = a$, $a$ being the point of approximation.
+        \item The error is $0$ at the point $x = a$, $a$ being the point of approximation.
+        \item As the degree of the taylor polynomial increases, the error decreases and the approximation curve resembles the actual function more and more over a wider range of numbers.
+    \end{enumerate}
+    \section{Root Finding Methods}
+    \subsection{Bisection Method}
+    \emph{According to \textbf{Descartes rule of sign}, if $f$ is a continuous real valued function in $[a,b]$ such that $f(a)f(b)<0$ then $\exists \ c \in (a,b)$ such that $f(c)=0$.}
+    \parskip 1em
+    The bisection method uses the above principal recursively to find the approximate roots of a continuous function numerically. In naive terms, it is a basic binary search for the roots in $[a,b]$ until a specific desired precision is reached. It has the following algorithm :
+    \begin{lstlisting}
+        def bisectionRoot(func, a, b, e):
+            c = (a+b)/2
+            if abs(a-b)<=e:
+                return c
+            if f(a)*f(c)>0:
+                return bisectionRoot(f, c, b)
+            else:
+                return bisectionRoot(f, a, c)
+    \end{lstlisting}
+    Depending on the problem specific requirements, the above algorithm can be modified into an iterative version.
+    \subsection{Newton Raphson Method}
+    Let $f$ be a differentiable function of which we have to find a root. Let $f^{'}$ be its derivative.We start with an initial guess value of the root $x_0$. To get a better approximation of the root, we consider $x_1$ as the root, where $x_1$ is the point where the tangent $x_0$ intercepts the X-axis. Performing this step successively on every $x_n$ gives us $x_{n+1}$, which is a better approximation of the root. It has the following recursive equation :
+    \begin{equation}
+        x_{n+1} = x_n - \frac{f(x_n)}{f^{'}\left(x_n\right)}
+    \end{equation}
+    It has the following algorithm :
+    \begin{lstlisting}
+    def newtonRaphsonRoot(f, dfdx, a):
+        an = a - f(a)/dfdx(a)
+        return newtonRaphsonRoot(f,dfdx,an)
+    \end{lstlisting}
+    Depending on the problem specific requirements, the above algorithm can be modified into an iterative version.
+    \subsection{Secant Method}
+    Let $f$ be a continuous and a differentiable function. We start with 2 initial guess values of the root $a_0$ and $b_0$. To get a better approximation, we consider $c_0$ as the root where $c_0$ is the point where the secant line joining $a_0$ and $b_0$ intercepts the X-axis. Performing this operation on $b_n$ and $c_n$ successively gives us better and better approximations of the root. It has the following recursive equation:
+    \begin{eqnarray}
+        a_{n+1} &=& b_n \\
+        b_{n+1} &=& b_n - f(b)\frac{b-a}{f(b)-f(a)}
+    \end{eqnarray}
+    It has the following algorithm:
+    \begin{lstlisting}
+    def secantRoot(f, a, b):
+        c = b - f(b)*(b-a)/(f(b)-f(a))
+        return secantRoot(f, b, c)
+    \end{lstlisting}
+    \newpage
+    \section{Problems}
+    \subsection{$x^6 - x - 1$}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width = \textwidth]{plots/p1.png}
+        \label{fig:my_label}
+    \end{figure}
+    We can break this function down into difference of 2 functions as follows:
+    \begin{equation}
+        x^6-x-1 = x^6 - (x+1)
+    \end{equation}
+    As shown in the plot above, both these functions intersect somewhere in $(-1,0)$ and also $(1,2)$. The roots therefore lie in these ranges. Therefore we take the respective guess values as approximate roots, and run these methods on them.
+    \begin{table}[h!]
+        \centering
+        \begin{tabular}{|c|c c c|} 
+            \hline
+            \multicolumn{4}{|c|}{$x^6 - x - 1$}\\
+            \hline
+            \textbf{Method}&\textbf{Guess value(s)}&\textbf{Predicted root}&\textbf{iterations} \\ [0.5ex] 
+            \hline
+            Bisection & 1, 2 & 1.13471 & 16 \\ 
+            Newton Raphson & 2 & 1.13472 & 9 \\
+            Secant & 1, 2 & 1.13472 & 8 \\[1ex] 
+            \hline
+        \end{tabular}
+    \end{table}
+    \subsection{$x^3 - x^2 - x - 1$}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width = \textwidth]{plots/p2.png}
+        \label{fig:my_label}
+    \end{figure}
+    For $x=1$, we have $f(x)=-2$ and for $x=2$ we have $f(x)=1$. Hence we can be certain that there lies a root in $(1,2)$. Hence we can take these as the initial guess values for the bisection method. But an important point to be noted is that it is safer to take an initial guess value of $x_0=2$ rather than $x_0=1$ for the Newton-Raphson method because as we can see in the plot of the function there is an extreme ($f^{'}(x)=0$) hence the Newton Raphson method might fail if that point is encountered. Whereas, the function is strictly decreasing from $x = 2$ till the root.
+    \begin{table}[h!]
+        \centering
+        \begin{tabular}{|c|c c c|} 
+            \hline
+            \multicolumn{4}{|c|}{$x^3 - x^2 - x - 1$}\\
+            \hline
+            \textbf{Method}&\textbf{Guess value(s)}&\textbf{Predicted root}&\textbf{iterations} \\ [0.5ex] 
+            \hline
+            Bisection & 1, 2 & 1.83939 & 16 \\ 
+            Newton Raphson & 2 & 1.83929 & 5 \\
+            Secant & 1, 2 & 1.83929 & 6 \\[1ex] 
+            \hline
+        \end{tabular}
+    \end{table}
+    \subsection{$x = 1 + 0.3\cos x$}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width = \textwidth]{plots/p3.png}
+        \label{fig:my_label}
+    \end{figure}
+    We have $f(x) = x$ and $g(x) = 0.3\cos x$. The zeroes lie at the point where the plots of $f$ and $g$ intersect. As seen in the above figure, this happens for $x$ in the region $(1,1.5)$. Alternately, we can find the analytical guess values for the bisection method by noticing that the function $x - 1 - 0.3\cos x$ has the value -1.3 for $x = 0$ and a value of $\frac{\pi}{2} - 1$ for $x = \frac{\pi}{2}$, thus giving us the appropriate guess values for applying the bisection method.
+    \begin{table}[h!]
+        \centering
+        \begin{tabular}{|c|c c c|} 
+            \hline
+            \multicolumn{4}{|c|}{$x = 1 + 0.3\cos x$}\\
+            \hline
+            \textbf{Method}&\textbf{Guess value(s)}&\textbf{Predicted root}&\textbf{iterations} \\ [0.5ex] 
+            \hline
+            Bisection & 0, $\frac{\pi}{2}$ & 1.12839 & 17 \\ 
+            Newton Raphson & 2 & 1.12843 & 4 \\
+            Secant & 0, $\frac{\pi}{2}$ & 1.12843 & 4 \\[1ex] 
+            \hline
+        \end{tabular}
+    \end{table}
+    \subsection{$\cos x = 0.5 + \sin x$}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width = \textwidth]{plots/p4.png}
+        \label{fig:my_label}
+    \end{figure}
+    We have $f(x) = \cos x$ and $g(x) = 0.5 + \sin x$. The zeroes lie at the point where the plots of $f$ and $g$ intersect. As seen in the above figure, this happens for $x$ in the region $(0,0.5)$. Alternately, we can find the analytical guess values for the bisection method by noticing that the function $\sin x + 0.5 - \cos x$ has the value -0.5 for $x = 0$ and a value of $0.5$ for $x = \frac{\pi}{4}$, thus giving us the appropriate guess values for applying the bisection method.
+    \begin{table}[h!]
+        \centering
+        \begin{tabular}{|c|c c c|} 
+            \hline
+            \multicolumn{4}{|c|}{$\cos x = 0.5 + \sin x$}\\
+            \hline
+            \textbf{Method}&\textbf{Guess value(s)}&\textbf{Predicted root}&\textbf{iterations} \\ [0.5ex] 
+            \hline
+            Bisection & 0, $\frac{\pi}{4}$ & 0.42405 & 15 \\ 
+            Newton Raphson & $\frac{\pi}{4}$ & 0.42403 & 5 \\
+            Secant & 0, $\frac{\pi}{4}$ & 0.42403 & 5 \\[1ex] 
+            \hline
+        \end{tabular}
+    \end{table}
+    \subsection{$x = e^{-x}$}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width = \textwidth]{plots/p5.png}
+        \label{fig:my_label}
+    \end{figure}
+    We have $f(x) = x$ and $g(x) = e^{-x}$. The zeroes lie at the point where the plots of $f$ and $g$ intersect. As seen in the above figure, this happens for $x$ in the region $(0,0.5)$. Alternately, we can find the analytical guess values for the bisection method by noticing that the function $x - e^{-x}$ has the value -1 for $x = 0$ and a value of $1 - \frac{1}{e}$ for $x = 1$, thus giving us the appropriate guess values for applying the bisection method.
+    \begin{table}[h!]
+        \centering
+        \begin{tabular}{|c|c c c|} 
+            \hline
+            \multicolumn{4}{|c|}{$x = e^{-x}$}\\
+            \hline
+            \textbf{Method}&\textbf{Guess value(s)}&\textbf{Predicted root}&\textbf{iterations} \\ [0.5ex] 
+            \hline
+            Bisection & 0, 1 & 0.56709 & 16 \\ 
+            Newton Raphson & 1 & 0.56714 & 5 \\
+            Secant & 0, 1 & 0.56714 & 5 \\[1ex] 
+            \hline
+        \end{tabular}
+    \end{table}
+    \subsection{$e^{-x} = \sin x$}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width = \textwidth]{plots/p6.png}
+        \label{fig:my_label}
+    \end{figure}
+    We have $f(x) = e^{-x}$ and $g(x) = \sin x$. The zeroes lie at the point where the plots of $f$ and $g$ intersect. As seen in the above figure, this happens for $x$ in the region $(0.5,1)$. Alternately, we can find the analytical guess values for the bisection method by noticing that the function $e^{-x} - \sin x$ has the value 1 for $x = 0$ and a value of $\frac{1}{e^{\frac{\pi}{2}}} - 1$ for $x = \frac{\pi}{2}$, thus giving us the appropriate guess values for applying the bisection method.
+    \begin{table}[h!]
+        \centering
+        \begin{tabular}{|c|c c c|} 
+            \hline
+            \multicolumn{4}{|c|}{$e^{-x} = \sin x$}\\
+            \hline
+            \textbf{Method}&\textbf{Guess value(s)}&\textbf{Predicted root}&\textbf{iterations} \\ [0.5ex] 
+            \hline
+            Bisection & 0, $\frac{\pi}{2}$ & 0.58857 & 16 \\ 
+            Newton Raphson & $\frac{\pi}{2}$ & 0.58854 & 21 \\
+            Secant &  0, $\frac{\pi}{2}$ & 0.58853 & 7  \\[1ex] 
+            \hline
+        \end{tabular}
+    \end{table}
+    \subsection{$x^3 - 2x - 2$}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width = \textwidth]{plots/p7.png}
+        \label{fig:my_label}
+    \end{figure}
+    We can break this function down into difference of 2 functions as follows:
+    \begin{equation}
+        x^3-2x-1 = x^3 - 2(x+1)
+    \end{equation}
+    As shown in the plot above, both these functions intersect somewhere in $(1,2)$. The root therefore lies in this range. Therefore we take the these guess values as approximate roots, and run these methods on them.
+    \begin{table}[h!]
+        \centering
+        \begin{tabular}{|c|c c c|} 
+            \hline
+            \multicolumn{4}{|c|}{$x^3 - 2x - 2$}\\
+            \hline
+            \textbf{Method}&\textbf{Guess value(s)}&\textbf{Predicted root}&\textbf{iterations} \\ [0.5ex] 
+            \hline
+            Bisection & 1, 2 & 1.76934 & 16 \\ 
+            Newton Raphson & 2 & 1.76929 & 5 \\
+            Secant &  1, 2 & 1.76929 & 6 \\[1ex] 
+            \hline
+        \end{tabular}
+    \end{table}
+    \subsection{$e^x - x - 2$}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width = \textwidth]{plots/p8.png}
+        \label{fig:my_label}
+    \end{figure}
+    We can break this function down into difference of 2 functions as follows:
+    \begin{equation}
+        e^x-x-2 = e^x - (x+2)
+    \end{equation}
+    As shown in the plot above, both these functions intersect somewhere in $(1,2)$. The root therefore lies in this range. Therefore we take the these guess values as approximate roots, and run these methods on them.
+    \begin{table}[h!]
+        \centering
+        \begin{tabular}{|c|c c c|} 
+            \hline
+            \multicolumn{4}{|c|}{$e^x - x - 2$}\\
+            \hline
+            \textbf{Method}&\textbf{Guess value(s)}&\textbf{Predicted root}&\textbf{iterations} \\ [0.5ex] 
+            \hline
+            Bisection & 1, 2 & 1.14617 & 16 \\ 
+            Newton Raphson & 2 & 1.14619 & 7 \\
+            Secant &  1, 2 & 1.14619 & 6 \\[1ex] 
+            \hline
+        \end{tabular}
+    \end{table}
+    
+    \subsection{$1 + \sin x - x$}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width = \textwidth]{plots/p9.png}
+        \label{fig:my_label}
+    \end{figure}
+    We can break this function down into difference of 2 functions as follows:
+    \begin{equation}
+        1 + \sin x - x = (1 + \sin x) - (x)
+    \end{equation}
+    As shown in the plot above, both these functions intersect somewhere in $(1, 2)$. The root therefore lies in this range. Alternately, we can guess the values analytically by noting that $f(\frac{\pi}{2})>0$ and $f(\pi)<0$. Therefore the root lies in the region $(\frac{\pi}{2}, \pi)$, and we apply the bisection method using these guess values.
+    \begin{table}[h!]
+        \centering
+        \begin{tabular}{|c|c c c|} 
+            \hline
+            \multicolumn{4}{|c|}{$1 + \sin x - x$}\\
+            \hline
+            \textbf{Method}&\textbf{Guess value(s)}&\textbf{Predicted root}&\textbf{iterations} \\ [0.5ex] 
+            \hline
+            Bisection & $\frac{\pi}{2}, \pi$ & 1.93463 & 16 \\ 
+            Newton Raphson & $\pi$ & 1.93456 & 6 \\
+            Secant &  $\frac{\pi}{2}, \pi$ & 1.93456 & 5 \\[1ex] 
+            \hline
+        \end{tabular}
+    \end{table}
+    \subsection{$x^4 - x - 1$}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width = \textwidth]{plots/p10.png}
+        \label{fig:my_label}
+    \end{figure}
+    We can break this function down into difference of 2 functions as follows:
+    \begin{equation}
+        x^4 - x - 1 = x^4 - (x+1)
+    \end{equation}
+    As shown in the plot above, both these functions intersect somewhere in $(1, 2)$ and $(-1, 0)$. The roots therefore lie in these ranges and we apply the bisection method using these guess values.
+    \begin{table}[h!]
+        \centering
+        \begin{tabular}{|c|c c c|} 
+            \hline
+            \multicolumn{4}{|c|}{$x^4 - x - 1$}\\
+            \hline
+            \textbf{Method}&\textbf{Guess value(s)}&\textbf{Predicted root}&\textbf{iterations} \\ [0.5ex] 
+            \hline
+            Bisection & 1, 2 & 1.22077 & 16 \\ 
+            Newton Raphson & 2 & 1.22074 & 7 \\
+            Secant &  1, 2 & 1.22074 & 7 \\[1ex] 
+            \hline
+        \end{tabular}
+    \end{table}
+    \begin{table}[h!]
+        \centering
+        \begin{tabular}{|c|c c c|} 
+            \hline
+            \multicolumn{4}{|c|}{$x^4 - x - 1$}\\
+            \hline
+            \textbf{Method}&\textbf{Guess value(s)}&\textbf{Predicted root}&\textbf{iterations} \\ [0.5ex] 
+            \hline
+            Bisection & -1, 0 & -0.72443 & 16 \\ 
+            Newton Raphson & 0 & -0.72449 & 7 \\
+            Secant &  -1, 0 & -0.72449 & 7 \\[1ex] 
+            \hline
+        \end{tabular}
+    \end{table}
+    \newpage
+    \section{Regula Falsi method}
+    The Regula Falsi method is just a variation of the secant method. The only change here is that just like the bisection method, we try to keep the root between the 2 initial guess values.
+    
+    \parskip 1em
+    The advantage of the Regula Falsi method is that after the completion, we get a range between which the root certainly lies. But one disadvantage of this method is that it is very slow to converge to the actual roots.
+    
+    For example consider the following function:
+    
+    \begin{equation}
+    f(x) = x^6 - x - 1
+    \end{equation}
+    
+    From previous section, we know that the root is approximately, 1.3472. So we take 2 sets of guess values :
+    \begin{itemize}
+        \item $2, 3$
+        \item $1, 2$
+    \end{itemize}
+    \begin{figure}[h!]
+        \centering
+        \begin{subfigure}[t]{0.49\textwidth}
+            \includegraphics[width=\textwidth]{plots/secant1.png}
+            \caption{Convergence of Secant method}
+            \label{fig:secant1}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.49\textwidth}
+            \includegraphics[width=\textwidth]{plots/secant2.png}
+            \caption{Convergence of Regula Falsi method}
+            \label{fig:secant2}
+        \end{subfigure}
+    \end{figure}
+    As we can see in the above figure, the regula falsi method is slower in converging.
+    \newpage
+    \section{A comparison of Root Finding Methods}
+    Each of the above root finding algorithms have different use cases depending on various parameters. 
+    \subsection{Computational Ease}
+    Note that for applying the Newton Raphson method, we need to compute the value of the function at a given point as well as the derivative at that point. On the other hand, for the secant method and the bisection method, we need to compute the value of the function at 2 separate points. 
+    
+    If the derivative of the function at a point is easier to compute than the function itself, one should prefer to use the Newton Raphson method. This case arises typically for trigonometric and the exponential functions, where the derivative is just a simple transformation of the function itself, meaning that if we calculate the value of the function at a point, we can manipulate this value somehow to get the value of the derivative at that point. Other such examples are cases where the function itself is transcendental but the derivative is a polynomial.
+    
+    On the other hand, if the derivative is more computationally involved, other methods should be preferred over Newton Raphson method.
+    \subsection{Failure in convergence}
+    In case of certain functions, certain methods fail to converge to the root. The bisection method is by far the safest root finding method, in the sense that it is always guaranteed to converge to the solution. However, the same cannot be said for the other 2 methods.
+    
+    The Newton Raphson method fails to converge if it encounters an extrema in the due course of rootfinding. This can be seen from its recurrence relation:
+    \begin{equation}
+        x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}
+    \end{equation}
+    This relation is not defined when $f'(x_n)=0$. Therefore, Newton Raphson method should be avoided for functions with lots of turning points. Another hypothetical condition where this method may fail to converge is if that the recurrence condition keeps on giving the same solutions. Consider the following case:
+    \begin{eqnarray}
+        x_a = x_b - \frac{f(x_b)}{f'(x_b)}\nonumber\\
+        x_b = x_a - \frac{f(x_a)}{f'(x_a)}\nonumber
+    \end{eqnarray}
+    Therefore in this case Newton raphson method will not converge also. This method should be used only when we are sure that the function is behaving monotonically in our region of interest.
+    
+    The secant method fails to converge if at the 2 input parameters, the function has the same value.This can be seen from its recurrence relation:
+    \begin{equation}
+         x_{n+1} = x_n - f(x_n)\frac{x_n-x_{n-1}}{f(x_n)-f(x_{n-1})}
+    \end{equation}
+    It is clear that the recurrence relation is not defined if the function has the same values at $x_n$ and $x_{n-1}$. Another hypothetical condition where this method may fail to converge is if that the recurrence condition keeps on giving the same solutions.
+    \subsection{Rate of Convergence}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{plots/root2.png}
+        \caption{log($f(x_n)$ vs number of iterations}
+        \label{fig:my_label}
+    \end{figure}
+    The above figure show the typical number of iterations required by a given root finding algorithm to converge to the zero of the function. We can see that the bisection method is relatively slower than the other methods.
+    \newpage
+    \begin{figure}[h!]
+        \centering
+        \begin{subfigure}[t]{0.49\textwidth}
+            \includegraphics[width=\textwidth]{plots/root1.png}
+            \caption{$x^6-x-1$}
+            \label{fig:root1}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.49\textwidth}
+            \includegraphics[width=\textwidth]{plots/root2.png}
+            \caption{$x^3-x^2-x-1$}
+            \label{fig:root2}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.49\textwidth}
+            \includegraphics[width=\textwidth]{plots/root3.png}
+            \caption{$x = 1+0.3\cos x$}
+            \label{fig:root3}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.49\textwidth}
+            \includegraphics[width=\textwidth]{plots/root4.png}
+            \caption{$\cos x=0.5 + \sin x$}
+            \label{fig:root4}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.49\textwidth}
+            \includegraphics[width=\textwidth]{plots/root5.png}
+            \caption{$x=e^{-x}$}
+            \label{fig:root5}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.49\textwidth}
+            \includegraphics[width=\textwidth]{plots/root6.png}
+            \caption{$\sin x=e^{-x}$}
+            \label{fig:root6}
+        \end{subfigure}
+        \caption{Comparison of convergence of Bisection Method and Newton-Raphson Method}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \begin{subfigure}[t]{0.49\textwidth}
+            \includegraphics[width=\textwidth]{plots/root7.png}
+            \caption{$x^3 - 2x - 2$}
+            \label{fig:root7}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.49\textwidth}
+            \includegraphics[width=\textwidth]{plots/root8.png}
+            \caption{$x^4-x-1, root 1$}
+            \label{fig:root8}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.49\textwidth}
+            \includegraphics[width=\textwidth]{plots/root9.png}
+            \caption{$x^4-x-1, root 2$}
+            \label{fig:root9}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.49\textwidth}
+            \includegraphics[width=\textwidth]{plots/root10.png}
+            \caption{$e^x=x+2$}
+            \label{fig:root10}
+        \end{subfigure}
+        \caption{Comparison of convergence of Bisection Method and Newton-Raphson Method}
+    \end{figure}
+\end{document}

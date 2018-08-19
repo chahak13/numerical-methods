@@ -1,0 +1,320 @@
+\documentclass[12,a4paper]{article}
+
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{blindtext}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{
+  language=Python,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+\title{Computational and Numerical Methods}
+\date{\today}
+\author{Amarnath Karthi  201501005 \\ Chahak Mehta  201501422}
+
+\setlength{\parindent}{0em}
+
+\makeatletter
+\begin{document}
+    \begin{titlepage}
+	    \centering
+	    {\scshape\LARGE SC-374 \par}
+	    \vspace{0.1cm}
+	    {\huge \@title \par}
+	    \vspace{0.5cm}
+	    {\Large Assignment 3\par}
+	    \vspace{10cm}
+	    \Large Amarnath Karthi          201501005\\
+	    \Large Chahak Mehta             201501422\\
+	    \vspace{5cm}
+	    {\large \@date\par}
+    \end{titlepage}
+    \section{$y = \sqrt{x}$}
+    \textbf{Carry out the Lagrange linear interpolation between $(1,1)$ and $(4,2)$. Plot your interpolation function together with $y = \sqrt{x}$ for comparison.}
+
+    \parskip 1em
+    The first order lagrange interpolation polynomial is defined as follows:
+    \begin{equation}
+    \label{eq:1}
+    l_1(x) = \frac{x - x_1}{x_0-x_1}y_0 + \frac{x - x_0}{x_1 - x_0}y_1
+    \end{equation}
+    Placing in the given values $(1,1)$ and $(4,2)$ we get the following simplified equation:
+    \begin{equation}
+        l_1(x) = \frac{x}{3}+\frac{2}{3}
+    \end{equation}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{plots/q1.png}
+        \caption{First order lagrange polynomial for the function $y = \sqrt{x}$}
+        \label{fig:q1}
+    \end{figure}
+    Notice in the figure above that the first order Lagrange interpolation polynomial $l_1(x)$ is just a \textbf{secant} line passing through the two points of interpolation.
+    \newpage
+    \section{$y = e^x$}
+    \textbf{Construct out a Lagrange linear interpolation for $(0.82, 2.270500)$ and $(0.83, 2.293319)$. Extend your study with a Lagrange quadratic polynomial using $(0.84, 2316367)$. Compare your polynomials with the function $y = e^x$, plotting all of them on the same graph.}
+    
+    See \textbf{equation \ref{eq:1}} for the first order Lagrange interpolation of a given set of points. The quadratic Lagrange interpolation is given by:
+    \begin{equation}
+        \nonumber
+        \label{eq:2}
+        l_2(x) = \frac{(x - x_1)(x - x_2)}{(x_0 - x_1)(x_0 - x_2)}y_0 + \frac{(x - x_0)(x - x_2)}{(x_1 - x_0)(x_1 - x_2)}y_1 + \frac{(x - x_0)(x - x_1)}{(x_2 - x_0)(x_2 - x_1)}y_2
+    \end{equation}
+    Using the above formulae we perform the quadratic interpolation and match the results with $e^x$.
+    \begin{figure}[h!]
+        \centering
+        \begin{subfigure}[t]{0.49\textwidth}
+            \includegraphics[width=\textwidth]{plots/q2a.png}
+            \caption{$e^x$ and its interpolations}
+            \label{fig:q2a}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.49\textwidth}
+            \includegraphics[width=\textwidth]{plots/q2b.png}
+            \caption{error}
+            \label{fig:q2b}
+        \end{subfigure}
+    \end{figure}
+    
+    \textbf{Figure \ref{fig:q2a}} shows the plots of $e^x$, as well as the first and the second order Lagrange interpolation polynomials obtained from its samples. Notice that while the first order interpolation just gives us a line which barely represents the curve in a very small neighbourhood, the second order interpolation is a more accurate representation of the curve.
+    
+    \textbf{Figure \ref{fig:q2b}} is the log plot of the magnitude of error between the actual function and the interpolations. Notice that irrespective of the point in question, the quadratic interpolation is always more accurate than its linear counterpart for the same points of interpolation. Also notice that there are spikes at the points of interpolation. This is because at these points, the interpolation curves intersect the actual function, thereby giving a 0 error at those points. As we approach the point of interpolation, the error decreases, becomes 0 at the point and then again starts increasing.
+    \newpage
+    \section{Newton's divided-difference method - NDD}
+    \textbf{Construct a quadratic Lagrange polynomial using the points $(0, -1)$, $(1, -1)$, and $(2, 7)$. Plot your result. Extend this entire exercise with Newton’s divided-difference quadratic polynomial and compare the two methods.}
+    \begin{figure}[h!]
+        \centering
+        \begin{subfigure}[t]{0.49\textwidth}
+            \includegraphics[width=\textwidth]{plots/q3a.png}
+            \caption{Second order Lagrange interpolation}
+            \label{fig:q3a}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.49\textwidth}
+            \includegraphics[width=\textwidth]{plots/q3b.png}
+            \caption{Second order NDD interpolation}
+            \label{fig:q3b}
+        \end{subfigure}
+    \end{figure}
+    
+    In this case, irrespective of the interpolation method used, we get the same results for the second order interpolation. Therefore the 2 methods give us the same results here.
+    
+    This can be shown to be the case in general. Suppose we are interpolating over $n$ distinct sample points. Therefore we will be getting an $(n-1)^{th}$ order polynomial. There is one and only one polynomial of this order:
+    \begin{equation}
+        \nonumber
+        p_n(x) = a_0x^0 + a_1x^1 + a_2x^2 + ... + a_nx^n
+    \end{equation}
+    Substituting the n sample points in the equation, we will get a linear equation in $n$ variables, each being the coefficients in the polynomial. These will therefore have one and only one solution. This proves that both the Lagrange interpolation and the Newton's divided difference method will give the same polynomial.
+    \newpage
+    \section{$y = \frac{1}{x}$}
+    \begin{figure}[h!]
+        \centering
+        \begin{subfigure}[t]{0.49\textwidth}
+            \includegraphics[width=\textwidth]{plots/q4a.png}
+            \caption{Second order Lagrange interpolation}
+            \label{fig:q4a}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.49\textwidth}
+            \includegraphics[width=\textwidth]{plots/q4b.png}
+            \caption{Second order NDD interpolation}
+            \label{fig:q4b}
+        \end{subfigure}
+        \caption{Interpolations of $\frac{1}{x}$}
+    \end{figure}
+    In the above figures we can see that both the methods give use the same results for a given order of interpolation. Also note that as we increase the order, the range over which the interpolated curve resembles the function curve increases.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{plots/q4c.png}
+        \caption{Error log plot}
+        \label{fig:q4c}
+    \end{figure}
+    Notice in the above figure, spikes occur wherever the interpolated curve intersects the function.
+    \newpage
+    \section{Piecewise interpolation}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{plots/q5c.png}
+        \caption{Piecewise linear and quadratic interpolations }
+        \label{fig:q5c}
+    \end{figure}
+    In the above figure, we can see that even though the interpolation curves are continuous, they are not differentiable at the points of join.
+    \begin{figure}[h!]
+        \centering
+        \begin{subfigure}[t]{0.49\textwidth}
+            \includegraphics[width=\textwidth]{plots/q5b.png}
+            \caption{Piecewise Lagrange interpolation}
+            \label{fig:q5b}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.49\textwidth}
+            \includegraphics[width=\textwidth]{plots/q5b.png}
+            \caption{Piecewise NDD interpolation}
+            \label{fig:q5b2}
+        \end{subfigure}
+        \caption{Lagrange and NDD piecewise interpolation}
+    \end{figure}
+   
+   Notice that Lagrange and NDD methods give the same interpolation polynomial.
+   \newpage
+   \section{A comparison of the 2 interpolation methods}
+   \subsection{Errors}
+   Both the methods give the same polynomials and therefore have the same errors. Thus there is no difference between the 2 in the aspect of results theoretically. Also both of these methods have a drawback of exhibiting \textbf{Runge's Phenomenon}, which is basically a case where a higher order interpolation gives more error than a lower order one, because of oscillations at the end points. Essentially, this implies that \emph{Adding more data sometimes leads to more errors.} Therefore one must choose the interpolation points wisely.
+   \subsection{Computational Complexity}
+   In terms of computational complexity, Newtons divided difference is much better than Lagrange's method. This is because Newtons divided method has a recursive approach. Therefore when a new point is added to the data set, there is only a slight calculation involved. On the other hand, Lagrange's polynomial has to be re calculated from scratch on the addition of a new point. Also the evaluation of a Lagrange polynomial is more complex because of the high amount of calculations. Newtons method is more efficient when we want to interpolate data incrementally.
+   \section{Cubic spline interpolation}
+   Given $n$ ordered sample points $(x_0,y_0)$, $(x_1,y_1)$,  $(x_2,y_2)$, ..., $(x_{n-1},y_{n-1})$ the cubic spline interpolation gives us a set of $n-1$ cubic order polynomials $p_0$, $p_2$, $p_3$, ..., $p_{n-2}$, where $p_i$ is the interpolation polynomial between $(x_i,y_i)$ and $(x_{i+1}, y_{i+1})$, such that for any given point in the range $(x_0, x_{n-1})$, the resultant interpolation function is continuous, differentiable and also continuously differentiable.
+   
+   Therefore we see that the second order derivative of the interpolation function is a linear interpolation of the given points. The interpolation function can be obtained by integrating the linear interpolation twice and adding the restrictions that the function is continuous and differentiable at each sample points.
+   
+   Let $M_i$ be the second order derivative of the interpolation function at the point $(x_i,y_i)$. Also at the corner points we take the second order derivative to be 0. Therefore we have:
+   \begin{eqnarray}
+       \nonumber
+       M_0 &=& 0 \nonumber \\
+       M_{n-1} &=& 0\nonumber
+   \end{eqnarray}
+   Placing these conditions gives us the following recursive equation for $M_i$:
+   \begin{equation}
+        \nonumber
+        \frac{x_i - x_{i-1}}{6}M_{i-1} + \frac{x_{i+1} - x_{i-1}}{3}M_{i} + \frac{x_i - x_{i-1}}{6}M_{i+1} = \frac{y_{i}-y_{i-1}}{x_{i}-x_{i-1}} - \frac{y_{i}-y_{i-1}}{x_{i}-x_{i-1}}
+   \end{equation}
+   The above equation can be solved using simple Matrix Multiplication and inverse operations.
+   
+   Using these values of $M$, we calculate the spline functions.
+   \begin{eqnarray*}
+        S(x) &=& \frac{1}{6}\frac{M_{j-1}}{(x_j - x_{j-1})}(x_j - x)^3 + \frac{1}{6}\frac{M_{j}}{(x_j - x_{j-1})}(x - x_{j-1})^3 + Ax + B\\
+        A &=& D - C\\
+        B &=& Cx_j - Dx_{j-1}\\
+        C &=& \frac{y_{j-1}}{(x_j - x_{j-1})} - \frac{M_{j-1}}{6}(x_j - x_{j-1})\\
+        D &=& \frac{y_j}{(x_j - x_{j-1})} - \frac{M_{j}}{6}(x_j - x_{j-1})\\
+   \end{eqnarray*}
+   
+   \subsection{$y = \frac{1}{x}$}
+   \begin{table}[H]
+       \centering
+       \begin{tabular}{|c|c|c|c|c|}
+       \hline
+        $x$ & 1 & 2 & 3 & 4\\
+        \hline
+        $y$ & 1 & $\frac{1}{2}$ & $\frac{1}{3}$ & $\frac{1}{4}$\\
+        \hline
+       \end{tabular}
+   \end{table}
+   \begin{figure}[H]
+       \centering
+       \includegraphics[width=\textwidth]{plots/sq1a.png}
+       \caption{Spline interpolation and linear interpolations of $y = \frac{1}{x}$}
+       \label{fig:sq1a}
+   \end{figure}
+   In the above figure notice the smoothness of the spline interpolation, despite of being a piecewise interpolation method. This is the main advantage of using splines. It always gives us smooth functions.
+   
+   \begin{table}[H]
+       \centering
+       \begin{tabular}{|c|c|}
+       \hline
+        $M_0$ & 0 \\
+        $M_1$ & 0.5\\
+        $M_2$ & 0\\
+        $M_3$ & 0\\
+        \hline
+       \end{tabular}
+   \end{table}
+   
+   \begin{figure}[H]
+       \centering
+       \includegraphics[width=\textwidth]{plots/sq1b.png}
+       \caption{Spline interpolation error}
+       \label{fig:sq1b}
+   \end{figure}
+   Notice that the spline interpolation is not very accurate even in the region of interpolation.
+   \newpage
+   \subsection{Spline interpolation and linear interpolation}
+   \begin{table}[H]
+       \centering
+       \begin{tabular}{|c|c|c|c|c|c|c|c|}
+       \hline
+        $x$ & 0 & 1 & 2 & 2.5 & 3 & 3.5 & 4\\
+        \hline
+        $y$ & 2.5 & 0.5 & 0.5 & 1.5 & 1.5 & 1.125 & 0\\
+        \hline
+       \end{tabular}
+   \end{table}
+   \begin{figure}[H]
+       \centering
+       \includegraphics[width=\textwidth]{plots/sq2.png}
+   \end{figure}
+   \begin{table}[H]
+       \centering
+       \begin{tabular}{|c|c|}
+       \hline
+        $M_0$ & 0 \\
+        $M_1$ & 1.8481\\
+        $M_2$ & 4.6075\\
+        $M_3$ & -7.3412\\
+        $M_4$ & 0.7576\\
+        $M_5$ & -4.6893\\
+        $M_6$ & 0\\
+        \hline
+       \end{tabular}
+   \end{table}
+   \newpage
+   \subsection{$e^x - x^3$}
+   \begin{table}[H]
+       \centering
+       \begin{tabular}{|c|c|c|c|c|}
+       \hline
+        $x$ & -0.50 & 0 & 0.25 & 1\\
+        \hline
+        $y$ & 0.7315 & 1 & 1.2684 & 1.7183\\
+        \hline
+       \end{tabular}
+   \end{table}
+   \begin{figure}[h!]
+        \centering
+        \begin{subfigure}[t]{0.49\textwidth}
+            \includegraphics[width=\textwidth]{plots/sq3a.png}
+            \caption{linear interpolation}
+            \label{fig:sq3a}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.49\textwidth}
+            \includegraphics[width=\textwidth]{plots/sq3b.png}
+            \caption{spline interpolation}
+            \label{fig:q3b}
+        \end{subfigure}
+    \end{figure}
+    
+     \begin{table}[H]
+       \centering
+       \begin{tabular}{|c|c|}
+       \hline
+        $M_0$ & 0 \\
+        $M_1$ & 2.4342\\
+        $M_2$ & -1.7256\\
+        $M_3$ & 0\\
+        \hline
+       \end{tabular}
+   \end{table}
+   
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{plots/sq3c.png}
+        \caption{spline interpolation error}
+    \end{figure}
+\end{document}
